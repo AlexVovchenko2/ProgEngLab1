@@ -47,9 +47,9 @@ object Form1: TForm1
     Caption = 'LabelComment'
   end
   object LabelAnswer: TLabel
-    Left = 137
+    Left = 136
     Top = 352
-    Width = 67
+    Width = 107
     Height = 15
     Caption = 'LabelAnswer'
   end

@@ -37,6 +37,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 	StringGrid1->RowCount = Form1->n;
 	StringGrid1->ColCount = Form1->m;
 	if (Form1->n > 0 && Form1->m > 0){
+		Button1->Hide();
         Form1->createVect();
 		StringGrid1->Show();
 		LabelMatrix->Show();
@@ -54,7 +55,9 @@ AnsiString fmsg(int a, int b){
 	if (a == -1 || b == -1){
 		s = "full";
 		Form1->Button2->Hide();
+        Form1->LabelMatrix->Hide();
 		Form1->Button3->Show();
+		Form1->EditMatrix->Hide();
 	}
 	else { s = "Enter elem [" + (AnsiString)a + "]" + "[" + (AnsiString)b + "]"; }
 	return s;
@@ -70,6 +73,7 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
 		buff = EditMatrix->Text;
 		StringGrid1->Cells[m1][n1] = buff;
 		Form1->matrix[m1][n1] = StrToFloat(buff);
+		Form1->sum += StrToFloat(buff);
 		m1++;
 	}
 	else if (m1 >= Form1->m && n1 < Form1->n-1){
@@ -78,6 +82,7 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
 		buff = EditMatrix->Text;
 		StringGrid1->Cells[m1][n1] = buff;
 		Form1->matrix[m1][n1] = StrToFloat(buff);
+		Form1->sum += StrToFloat(buff);
 		m1 += 1;
 		LabelMatrix->Caption = fmsg(n1, m1);
 	}
@@ -87,14 +92,32 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
 	else{
 
 	}
-	LabelMatrix->Caption = fmsg((m1 >= Form1->m) ? ((n1 + 1 >= Form1->n) ? -1 : n1 + 1) : n1, (m1 >= Form1->m) ? 0 : m1);
+	LabelMatrix->Caption = fmsg((m1 >= Form1->m) ?
+		((n1 + 1 >= Form1->n) ? -1 : n1 + 1) : n1, (m1 >= Form1->m) ? 0 : m1);
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Button3Click(TObject *Sender)
 {
-	//std::vector<std::vector<double>> matrix;
-	//for (int i = 0; i )
+	float sr = sum/(n*m);
+	LabelComment->Caption = "Arithmetic mean: " + (AnsiString)sr;
 	LabelComment->Show();
+	int counter = 0;
+	if (sr > 0) {
+		for (int i = 1; i < m; i+=2) {
+			for (int j = 0; j < n; j++) {
+				if (matrix[i][j] < 0) { counter++; }
+			}
+		}
+		LabelAnswer->Caption = "Negative elements in odd columns: " + (AnsiString)counter;
+	}   else {
+		for (int i = 0; i < m; i+=2) {
+			for (int j = 0; j < n; j++) {
+				if (matrix[i][j] > 0) { counter++; }
+			}
+		}
+		LabelAnswer->Caption = "Positive elements in even columns: " + (AnsiString)counter;
+	}
+	Button3->Hide();
 	LabelAnswer->Show();
 
 }

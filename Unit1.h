@@ -33,6 +33,7 @@ __published:	// IDE-managed Components
 private:	// User declarations
 public:		// User declarations
 	int n, m;
+    float sum;
 	std::vector< std::vector<float> > matrix;
 	void createVect(){
 		std::vector<float> temp;
