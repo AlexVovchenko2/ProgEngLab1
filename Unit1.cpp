@@ -96,29 +96,18 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
 		((n1 + 1 >= Form1->n) ? -1 : n1 + 1) : n1, (m1 >= Form1->m) ? 0 : m1);
 }
 //---------------------------------------------------------------------------
+
+//function from unit2
+AnsiString task(std::vector<std::vector<float>> matrix, int n, int m, float sr);
+
 void __fastcall TForm1::Button3Click(TObject *Sender)
 {
 	float sr = sum/(n*m);
 	LabelComment->Caption = "Arithmetic mean: " + (AnsiString)sr;
 	LabelComment->Show();
-	int counter = 0;
-	if (sr > 0) {
-		for (int i = 1; i < m; i+=2) {
-			for (int j = 0; j < n; j++) {
-				if (matrix[i][j] < 0) { counter++; }
-			}
-		}
-		LabelAnswer->Caption = "Negative elements in odd columns: " + (AnsiString)counter;
-	}   else {
-		for (int i = 0; i < m; i+=2) {
-			for (int j = 0; j < n; j++) {
-				if (matrix[i][j] > 0) { counter++; }
-			}
-		}
-		LabelAnswer->Caption = "Positive elements in even columns: " + (AnsiString)counter;
-	}
+	AnsiString s = task(matrix, n, m, sr);
+	LabelAnswer->Caption = s;
 	Button3->Hide();
 	LabelAnswer->Show();
-
 }
 //---------------------------------------------------------------------------
