@@ -39,6 +39,20 @@ object Form1: TForm1
     Height = 15
     Caption = 'Enter elem [0][0]:'
   end
+  object LabelComment: TLabel
+    Left = 136
+    Top = 320
+    Width = 82
+    Height = 15
+    Caption = 'LabelComment'
+  end
+  object LabelAnswer: TLabel
+    Left = 137
+    Top = 352
+    Width = 67
+    Height = 15
+    Caption = 'LabelAnswer'
+  end
   object EditRows: TEdit
     Left = 216
     Top = 61
@@ -89,5 +103,14 @@ object Form1: TForm1
     Caption = 'Confirm'
     TabOrder = 5
     OnClick = Button2Click
+  end
+  object Button3: TButton
+    Left = 136
+    Top = 281
+    Width = 107
+    Height = 25
+    Caption = 'Solve the problem'
+    TabOrder = 6
+    OnClick = Button3Click
   end
 end

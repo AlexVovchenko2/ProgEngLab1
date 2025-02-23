@@ -16,6 +16,9 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 	LabelMatrix->Hide();
 	EditMatrix->Hide();
 	Button2->Hide();
+	Button3->Hide();
+	LabelComment->Hide();
+	LabelAnswer->Hide();
 }
 
 int n, m;
@@ -34,6 +37,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 	StringGrid1->RowCount = Form1->n;
 	StringGrid1->ColCount = Form1->m;
 	if (Form1->n > 0 && Form1->m > 0){
+        Form1->createVect();
 		StringGrid1->Show();
 		LabelMatrix->Show();
 		EditMatrix->Show();
@@ -45,27 +49,12 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-
-
-/*void __fastcall TForm1::EditMatrixChange(TObject *Sender)
-{
-	StringGrid1->Cells[1][1] = EditMatrix->Text;
-}    */
-//---------------------------------------------------------------------------
-
-//---------------------------------------------------------------------------
-/*void __fastcall TForm1::EditMatrixKeyPress(TObject *Sender, System::WideChar &Key)
-{
-	if (Key == 13){
-		StringGrid1->Cells[n1][m1] = EditMatrix->Text;
-	}
-	n1 += 1;
-}   */
-
 AnsiString fmsg(int a, int b){
 	AnsiString s;
 	if (a == -1 || b == -1){
 		s = "full";
+		Form1->Button2->Hide();
+		Form1->Button3->Show();
 	}
 	else { s = "Enter elem [" + (AnsiString)a + "]" + "[" + (AnsiString)b + "]"; }
 	return s;
@@ -76,15 +65,19 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
 {
 	//const AnsiString msg = "Enter elem ";
 	//AnsiString msgFull = msg + "[" + (AnsiString)n1 + "]" + "[" + (AnsiString)m1 + "]";
-
+	AnsiString buff;
 	if (m1 < Form1->m && n1 < Form1->n){
-		StringGrid1->Cells[m1][n1] = EditMatrix->Text;
+		buff = EditMatrix->Text;
+		StringGrid1->Cells[m1][n1] = buff;
+		Form1->matrix[m1][n1] = StrToFloat(buff);
 		m1++;
 	}
 	else if (m1 >= Form1->m && n1 < Form1->n-1){
 		m1 = 0;
 		n1++;
-		StringGrid1->Cells[m1][n1] = EditMatrix->Text;
+		buff = EditMatrix->Text;
+		StringGrid1->Cells[m1][n1] = buff;
+		Form1->matrix[m1][n1] = StrToFloat(buff);
 		m1 += 1;
 		LabelMatrix->Caption = fmsg(n1, m1);
 	}
@@ -95,5 +88,14 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
 
 	}
 	LabelMatrix->Caption = fmsg((m1 >= Form1->m) ? ((n1 + 1 >= Form1->n) ? -1 : n1 + 1) : n1, (m1 >= Form1->m) ? 0 : m1);
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::Button3Click(TObject *Sender)
+{
+	//std::vector<std::vector<double>> matrix;
+	//for (int i = 0; i )
+	LabelComment->Show();
+	LabelAnswer->Show();
+
 }
 //---------------------------------------------------------------------------
