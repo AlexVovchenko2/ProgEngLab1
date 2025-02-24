@@ -49,7 +49,7 @@ object Form1: TForm1
   object LabelAnswer: TLabel
     Left = 136
     Top = 352
-    Width = 107
+    Width = 67
     Height = 15
     Caption = 'LabelAnswer'
   end
@@ -76,6 +76,7 @@ object Form1: TForm1
     Height = 120
     FixedCols = 0
     FixedRows = 0
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goFixedRowDefAlign]
     TabOrder = 2
   end
   object Button1: TButton
@@ -102,7 +103,6 @@ object Form1: TForm1
     Height = 25
     Caption = 'Confirm'
     TabOrder = 5
-    OnClick = Button2Click
   end
   object Button3: TButton
     Left = 136

@@ -40,9 +40,10 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 		Button1->Hide();
         Form1->createVect();
 		StringGrid1->Show();
-		LabelMatrix->Show();
-		EditMatrix->Show();
-		Button2->Show();
+		//LabelMatrix->Show();
+		//EditMatrix->Show();
+		//Button2->Show();
+		Button3->Show();
 	}else{
 		LabelMatrix->Caption = "Incorrect size";
 		LabelMatrix->Show();
@@ -64,11 +65,11 @@ AnsiString fmsg(int a, int b){
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TForm1::Button2Click(TObject *Sender)
-{
+//void __fastcall TForm1::Button2Click(TObject *Sender)
+//{
 	//const AnsiString msg = "Enter elem ";
 	//AnsiString msgFull = msg + "[" + (AnsiString)n1 + "]" + "[" + (AnsiString)m1 + "]";
-	AnsiString buff;
+	/*AnsiString buff;
 	if (m1 < Form1->m && n1 < Form1->n){
 		buff = EditMatrix->Text;
 		StringGrid1->Cells[m1][n1] = buff;
@@ -93,8 +94,13 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
 
 	}
 	LabelMatrix->Caption = fmsg((m1 >= Form1->m) ?
-		((n1 + 1 >= Form1->n) ? -1 : n1 + 1) : n1, (m1 >= Form1->m) ? 0 : m1);
-}
+		((n1 + 1 >= Form1->n) ? -1 : n1 + 1) : n1, (m1 >= Form1->m) ? 0 : m1); */
+   /*	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			Form1->matrix[m1][n1] = StrToFloat(StringGrid1->Cells[i][j]);
+		}
+	} */
+//}
 //---------------------------------------------------------------------------
 
 //function from unit2
@@ -102,6 +108,22 @@ AnsiString task(std::vector<std::vector<float>> matrix, int n, int m, float sr);
 
 void __fastcall TForm1::Button3Click(TObject *Sender)
 {
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			matrix[i][j] = (StringGrid1->Cells[i][j] != "") ? StrToFloat(StringGrid1->Cells[i][j]) : 0;
+			sum += matrix[i][j];
+		}
+	}
+	/*for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			StringGrid1->Cells[i][j] = 0;
+		}
+	}
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			StringGrid1->Cells[i][j] = matrix[i][j];
+		}
+	}  */
 	float sr = sum/(n*m);
 	LabelComment->Caption = "Arithmetic mean: " + (AnsiString)sr;
 	LabelComment->Show();
